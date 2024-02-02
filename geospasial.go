@@ -1,4 +1,4 @@
-package gisgeospatial
+package gisgeospasial
 
 import (
 	"context"
@@ -193,14 +193,16 @@ func GeoCenterQuery(client *mongo.Database, center []float64, radius int) ([]Loc
 }
 
 func GeoGeometryQuery(client *mongo.Database, geometry bson.M) ([]LocationData, error) {
+	// Actual implementation of the function
 	collection := client.Collection("location")
 	filter := bson.M{
 		"border": bson.M{
-			"$geoWithin": bson.M{
+			"$near": bson.M{
 				"$geometry": geometry,
 			},
 		},
 	}
+
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
@@ -217,7 +219,6 @@ func GeoGeometryQuery(client *mongo.Database, geometry bson.M) ([]LocationData, 
 
 	return results, nil
 }
-
 func GeoMaxDistanceQuery(client *mongo.Database, point []float64, maxDistance int) ([]LocationData, error) {
 	collection := client.Collection("location")
 	filter := bson.M{
