@@ -1,4 +1,4 @@
-package geospatials
+package gisgeospatial
 
 type GeoBorder struct {
 	Type        string        `bson:"type"`

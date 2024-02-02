@@ -1,4 +1,4 @@
-package geospatials
+package gisgeospatial
 
 import (
 	"context"
